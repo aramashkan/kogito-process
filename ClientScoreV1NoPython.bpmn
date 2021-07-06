@@ -1,0 +1,274 @@
+<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" xmlns:xsi="xsi" id="_tyWKsLxvEDm2Rd9gGztiUA" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+  <bpmn2:itemDefinition id="_application_idItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_product_idItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_resultItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_calculated_limitItem" structureRef="Float"/>
+  <bpmn2:itemDefinition id="_decision_idItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_scoring_resultItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_decision_flagItem" structureRef="Boolean"/>
+  <bpmn2:itemDefinition id="_scoreItem" structureRef="Float"/>
+  <bpmn2:itemDefinition id="_integration_resultItem" structureRef="String"/>
+  <bpmn2:process id="client_scoring_v1" drools:packageName="com.digitalfinance.riskengine" drools:version="1.0" drools:adHoc="false" name="Client scoring " isExecutable="true" processType="Public">
+    <bpmn2:property id="application_id" itemSubjectRef="_application_idItem" name="application_id">
+      <bpmn2:extensionElements>
+        <drools:metaData name="customTags">
+          <drools:metaValue><![CDATA[input]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:property>
+    <bpmn2:property id="product_id" itemSubjectRef="_product_idItem" name="product_id">
+      <bpmn2:extensionElements>
+        <drools:metaData name="customTags">
+          <drools:metaValue><![CDATA[input]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:property>
+    <bpmn2:property id="result" itemSubjectRef="_resultItem" name="result"/>
+    <bpmn2:property id="calculated_limit" itemSubjectRef="_calculated_limitItem" name="calculated_limit"/>
+    <bpmn2:property id="decision_id" itemSubjectRef="_decision_idItem" name="decision_id"/>
+    <bpmn2:property id="scoring_result" itemSubjectRef="_scoring_resultItem" name="scoring_result"/>
+    <bpmn2:property id="decision_flag" itemSubjectRef="_decision_flagItem" name="decision_flag"/>
+    <bpmn2:property id="score" itemSubjectRef="_scoreItem" name="score"/>
+    <bpmn2:property id="integration_result" itemSubjectRef="_integration_resultItem" name="integration_result"/>
+    <bpmn2:sequenceFlow id="_D81556C2-F14E-4987-AD74-9D5BD9B44ABF" sourceRef="_579B3BBC-0E84-49B0-8E2D-9F1360C526BE" targetRef="_44625907-E984-4E18-8FB6-A87C78159EEE"/>
+    <bpmn2:sequenceFlow id="_F5F64994-CBDD-4BAA-AE99-8AF44CA85502" sourceRef="_2B6DD951-8DFE-4CA6-BD7B-88345D7FCF48" targetRef="_87216956-ADC0-484B-9800-281FBDAA26DF">
+      <bpmn2:extensionElements>
+        <drools:metaData name="isAutoConnection.target">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_BB561B03-B6C6-460E-B956-9E380C4055A6" sourceRef="_44625907-E984-4E18-8FB6-A87C78159EEE" targetRef="_2B6DD951-8DFE-4CA6-BD7B-88345D7FCF48"/>
+    <bpmn2:sequenceFlow id="_BC707FD1-3B05-4BC6-A8C2-107E3CF5CFB5" sourceRef="_87216956-ADC0-484B-9800-281FBDAA26DF" targetRef="_74500848-35EC-41EC-B91B-CF5C87A82FF5"/>
+    <bpmn2:sequenceFlow id="_DE86AC00-91E9-4C18-8C0F-579551536FF5" sourceRef="_F130C00F-EA8D-455D-AECC-2ACBB09FA6B3" targetRef="_579B3BBC-0E84-49B0-8E2D-9F1360C526BE"/>
+    <bpmn2:scriptTask id="_87216956-ADC0-484B-9800-281FBDAA26DF" name="Get similar apps from WEB DB" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Get similar apps from WEB DB]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="integrationType">
+          <drools:metaValue><![CDATA[DATA_BASE_REQUEST]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="cacheType">
+          <drools:metaValue><![CDATA[DEFAULT]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="dbRequestType">
+          <drools:metaValue><![CDATA[similar-apps]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_F5F64994-CBDD-4BAA-AE99-8AF44CA85502</bpmn2:incoming>
+      <bpmn2:outgoing>_BC707FD1-3B05-4BC6-A8C2-107E3CF5CFB5</bpmn2:outgoing>
+      <bpmn2:script>com.digitalfinance.riskengine.bpmn.integration.db.DBClientAdapter.call(kcontext);</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:scriptTask id="_44625907-E984-4E18-8FB6-A87C78159EEE" name="Get app data from CRM DB" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Get app data from CRM DB]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="integrationType">
+          <drools:metaValue><![CDATA[DATA_BASE_REQUEST]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="cacheType">
+          <drools:metaValue><![CDATA[DEFAULT]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="dbRequestType">
+          <drools:metaValue><![CDATA[crm-app-data-request]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_D81556C2-F14E-4987-AD74-9D5BD9B44ABF</bpmn2:incoming>
+      <bpmn2:outgoing>_BB561B03-B6C6-460E-B956-9E380C4055A6</bpmn2:outgoing>
+      <bpmn2:script>com.digitalfinance.riskengine.bpmn.integration.db.DBClientAdapter.call(kcontext);</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:scriptTask id="_579B3BBC-0E84-49B0-8E2D-9F1360C526BE" name="Get app data from WEB DB" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Get app data from WEB DB]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="integrationType">
+          <drools:metaValue><![CDATA[DATA_BASE_REQUEST]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="cacheType">
+          <drools:metaValue><![CDATA[DEFAULT]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="dbRequestType">
+          <drools:metaValue><![CDATA[web-app-data-request]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_DE86AC00-91E9-4C18-8C0F-579551536FF5</bpmn2:incoming>
+      <bpmn2:outgoing>_D81556C2-F14E-4987-AD74-9D5BD9B44ABF</bpmn2:outgoing>
+      <bpmn2:script>com.digitalfinance.riskengine.bpmn.integration.db.DBClientAdapter.call(kcontext);</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:scriptTask id="_2B6DD951-8DFE-4CA6-BD7B-88345D7FCF48" name="Amazon Rekognition" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Amazon Rekognition]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="integrationType">
+          <drools:metaValue><![CDATA[AMAZON]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="cacheType">
+          <drools:metaValue><![CDATA[DEFAULT]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_BB561B03-B6C6-460E-B956-9E380C4055A6</bpmn2:incoming>
+      <bpmn2:outgoing>_F5F64994-CBDD-4BAA-AE99-8AF44CA85502</bpmn2:outgoing>
+      <bpmn2:script>com.digitalfinance.riskengine.bpmn.integration.amazon.AmazonIntegration.process(kcontext);</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:endEvent id="_74500848-35EC-41EC-B91B-CF5C87A82FF5" name="Finish decision">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Finish decision]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_BC707FD1-3B05-4BC6-A8C2-107E3CF5CFB5</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:startEvent id="_F130C00F-EA8D-455D-AECC-2ACBB09FA6B3" name="Start decision">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Start decision]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>_DE86AC00-91E9-4C18-8C0F-579551536FF5</bpmn2:outgoing>
+    </bpmn2:startEvent>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="client_scoring_v1">
+      <bpmndi:BPMNShape id="shape__F130C00F-EA8D-455D-AECC-2ACBB09FA6B3" bpmnElement="_F130C00F-EA8D-455D-AECC-2ACBB09FA6B3">
+        <dc:Bounds height="56" width="56" x="85" y="47"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__74500848-35EC-41EC-B91B-CF5C87A82FF5" bpmnElement="_74500848-35EC-41EC-B91B-CF5C87A82FF5">
+        <dc:Bounds height="56" width="56" x="559" y="504"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__2B6DD951-8DFE-4CA6-BD7B-88345D7FCF48" bpmnElement="_2B6DD951-8DFE-4CA6-BD7B-88345D7FCF48">
+        <dc:Bounds height="102" width="154" x="510" y="125"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__579B3BBC-0E84-49B0-8E2D-9F1360C526BE" bpmnElement="_579B3BBC-0E84-49B0-8E2D-9F1360C526BE">
+        <dc:Bounds height="62" width="254" x="190" y="44"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__44625907-E984-4E18-8FB6-A87C78159EEE" bpmnElement="_44625907-E984-4E18-8FB6-A87C78159EEE">
+        <dc:Bounds height="63" width="256" x="189" y="144"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__87216956-ADC0-484B-9800-281FBDAA26DF" bpmnElement="_87216956-ADC0-484B-9800-281FBDAA26DF">
+        <dc:Bounds height="64" width="313" x="430" y="276"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="edge_shape__F130C00F-EA8D-455D-AECC-2ACBB09FA6B3_to_shape__579B3BBC-0E84-49B0-8E2D-9F1360C526BE" bpmnElement="_DE86AC00-91E9-4C18-8C0F-579551536FF5">
+        <di:waypoint x="113" y="75"/>
+        <di:waypoint x="190" y="75"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__87216956-ADC0-484B-9800-281FBDAA26DF_to_shape__74500848-35EC-41EC-B91B-CF5C87A82FF5" bpmnElement="_BC707FD1-3B05-4BC6-A8C2-107E3CF5CFB5">
+        <di:waypoint x="586.5" y="308"/>
+        <di:waypoint x="587" y="504"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__44625907-E984-4E18-8FB6-A87C78159EEE_to_shape__2B6DD951-8DFE-4CA6-BD7B-88345D7FCF48" bpmnElement="_BB561B03-B6C6-460E-B956-9E380C4055A6">
+        <di:waypoint x="317" y="175.5"/>
+        <di:waypoint x="510" y="176"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__2B6DD951-8DFE-4CA6-BD7B-88345D7FCF48_to_shape__87216956-ADC0-484B-9800-281FBDAA26DF" bpmnElement="_F5F64994-CBDD-4BAA-AE99-8AF44CA85502">
+        <di:waypoint x="587" y="176"/>
+        <di:waypoint x="586.5" y="276"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__579B3BBC-0E84-49B0-8E2D-9F1360C526BE_to_shape__44625907-E984-4E18-8FB6-A87C78159EEE" bpmnElement="_D81556C2-F14E-4987-AD74-9D5BD9B44ABF">
+        <di:waypoint x="317" y="75"/>
+        <di:waypoint x="317" y="144"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmn2:relationship type="BPSimData">
+    <bpmn2:extensionElements>
+      <bpsim:BPSimData>
+        <bpsim:Scenario id="default" name="Simulationscenario">
+          <bpsim:ScenarioParameters/>
+          <bpsim:ElementParameters elementRef="_F130C00F-EA8D-455D-AECC-2ACBB09FA6B3">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters elementRef="_2B6DD951-8DFE-4CA6-BD7B-88345D7FCF48">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters>
+              <bpsim:Availability>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters>
+              <bpsim:UnitCost>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters elementRef="_579B3BBC-0E84-49B0-8E2D-9F1360C526BE">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters>
+              <bpsim:Availability>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters>
+              <bpsim:UnitCost>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters elementRef="_44625907-E984-4E18-8FB6-A87C78159EEE">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters>
+              <bpsim:Availability>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters>
+              <bpsim:UnitCost>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters elementRef="_87216956-ADC0-484B-9800-281FBDAA26DF">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters>
+              <bpsim:Availability>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters>
+              <bpsim:UnitCost>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+        </bpsim:Scenario>
+      </bpsim:BPSimData>
+    </bpmn2:extensionElements>
+    <bpmn2:source>_tyWKsLxvEDm2Rd9gGztiUA</bpmn2:source>
+    <bpmn2:target>_tyWKsLxvEDm2Rd9gGztiUA</bpmn2:target>
+  </bpmn2:relationship>
+</bpmn2:definitions>
